@@ -1,0 +1,26 @@
+epoch: 2000
+batch_size: 80    # The batch size on each GPU, this could affect the final diffusion training performance
+T: 1000
+channel: 128
+channel_mult:
+  - 1
+  - 2
+  - 2
+  - 2
+attn:
+  - 1
+num_res_blocks: 2
+dropout: 0.1
+lr: 2.0e-4
+beta_1: 1.0e-04
+beta_T: 0.02
+img_size: 32
+grad_clip: 1.0
+device: "cuda:0"
+save_weight_dir: "Checkpoints"
+sampled_dir: "SampledImgs"
+sampledImgName: "sampled_images"
+save_ckpt_interval: 200
+nrow: 10
+dataset: "cifar100"
+data_path: "/afs/crc.nd.edu/user/d/dzeng2/data/cifar100/"
