@@ -1,23 +1,21 @@
 epoch: 1000
-batch_size: 512
-optimizer: "sgd"
+batch_size: 1024
 warmup_start_lr: 1.0e-3
-lr: 0.3
+lr: 0.5
 linear_eval_lr: 1.0   # linear evaluation learning rate
 weight_decay: 1.0e-4
-img_size: 32
+img_size: 64
 device: "cuda:0"
 save_weight_dir: "ckpts"
 save_ckpt_interval: 100
 log_interval: 20
-dataset: "cifar100"
-dataset_path: "/afs/crc.nd.edu/user/d/dzeng2/data/cifar100/"
+dataset: "stl10"
+dataset_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
 feat_dim: 256
 hidden_dim: 4096
-moco_K: 32768
-moco_momentum: 0.99
 temperature: 0.2
 num_workers: 32
 seed: 123
 backbone: "resnet18"
+# backbone: "resnet50"
 use_dp: True

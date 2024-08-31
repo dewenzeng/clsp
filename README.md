@@ -14,26 +14,26 @@ Accuracy might be different from the number in the paper because of random initi
 
 | Method       | Backbone | Epochs | Offline Acc@1  | Tensorboard    | Checkpoint |
 |--------------|--------|:------:|:--------------:|:--------------:|:----------:|
-| CLSP-SimCLR  | ResNet18 |  1000  | 94.45        | [:link:](./runs_release/simclr_clsp_cifar10_resnet18_bs-1024_temp-0.2_2024-08-24_15-39-29/) |      [:link:](https://drive.google.com/file/d/1eQbezpJWeI4dy65iuXeNU5_iCtY97YmB/view?usp=sharing)      |
-| CLSP-MoCo    | ResNet18 |  1000  | 94.62        | [:link:](./runs_release/moco_clsp_cifar10_resnet18_bs-512_temp-0.2_2024-08-24_22-14-18/) |      [:link:](https://drive.google.com/file/d/1u-XJIGOprherVrdDe_-61uZoV6WiCfN2/view?usp=sharing)      |
-| CLSP-SimCLR  | ResNet50 |  1000  | 95.57        | [:link:](./runs_release/simclr_clsp_cifar10_resnet50_bs-1024_temp-0.2_2024-08-28_20-25-41/) |      [:link:](https://drive.google.com/file/d/1oPn9kqFSC0LXVBvpdbf6dW4Qkgb5mtvE/view?usp=sharing)      |
-| CLSP-MoCo    | ResNet50 |  1000  |           | [:link:]() |      [:link:]()      |
-| SimCLR       | ResNet18 |  1000  | 91.45        | [:link:](./runs_release/simclr_cifar10_resnet18_bs-1024_temp-0.2_2024-08-13_16-06-34/) |      [:link:](https://drive.google.com/file/d/1cpIA_0_pAppuZJ2C3ZmoBdelIfHh3hfC/view?usp=sharing)      |
-| MoCo         | ResNet18 |  1000  | 92.29        | [:link:](./runs_release/moco_cifar10_resnet18_bs-512_temp-0.2_2024-08-16_13-56-02/) |      [:link:](https://drive.google.com/file/d/1sIGbSVi6ojqHdMXshCW38Wh0AVphmI8f/view?usp=sharing)      |
-| SimCLR       | ResNet50 |  1000  | 93.03 ([94.00](https://arxiv.org/abs/2002.05709)) | [:link:](./runs_release/simclr_cifar10_resnet50_bs-1024_temp-0.2_2024-08-28_20-10-21/) |      [:link:](https://drive.google.com/file/d/1SC_sk7RlPO1zkSKPL8NPOO5MXGr_qOts/view?usp=sharing)      |
-| MoCo         | ResNet50 |  1000  |           | [:link:]() |      [:link:]()      |
+| CLSP-SimCLR  | ResNet18 |  1000  | 94.45        | [:running:](./runs_release/simclr_clsp_cifar10_resnet18_bs-1024_temp-0.2_2024-08-24_15-39-29/)      |      [:link:](https://drive.google.com/file/d/1eQbezpJWeI4dy65iuXeNU5_iCtY97YmB/view?usp=sharing)      |
+| CLSP-MoCo    | ResNet18 |  1000  | 94.62        | [:running:](./runs_release/moco_clsp_cifar10_resnet18_bs-512_temp-0.2_2024-08-24_22-14-18/)         |      [:link:](https://drive.google.com/file/d/1u-XJIGOprherVrdDe_-61uZoV6WiCfN2/view?usp=sharing)      |
+| CLSP-SimCLR  | ResNet50 |  1000  | 95.57        | [:running:](./runs_release/simclr_clsp_cifar10_resnet50_bs-1024_temp-0.2_2024-08-28_20-25-41/)      |      [:link:](https://drive.google.com/file/d/1oPn9kqFSC0LXVBvpdbf6dW4Qkgb5mtvE/view?usp=sharing)      |
+| CLSP-MoCo    | ResNet50 |  1000  | 96.04        | [:running:](./runs_release/moco_clsp_cifar10_resnet50_bs-512_temp-0.2_2024-08-29_12-48-04/)         |      [:link:](https://drive.google.com/file/d/1GpctLxzHGFlsLdlyvRaxXGkksSbcw08a/view?usp=sharing)      |
+| SimCLR       | ResNet18 |  1000  | 91.45        | [:running:](./runs_release/simclr_cifar10_resnet18_bs-1024_temp-0.2_2024-08-13_16-06-34/)           |      [:link:](https://drive.google.com/file/d/1cpIA_0_pAppuZJ2C3ZmoBdelIfHh3hfC/view?usp=sharing)      |
+| MoCo         | ResNet18 |  1000  | 92.29        | [:running:](./runs_release/moco_cifar10_resnet18_bs-512_temp-0.2_2024-08-16_13-56-02/)              |      [:link:](https://drive.google.com/file/d/1sIGbSVi6ojqHdMXshCW38Wh0AVphmI8f/view?usp=sharing)      |
+| SimCLR       | ResNet50 |  1000  | 93.03 ([94.00](https://arxiv.org/abs/2002.05709)) | [:running:](./runs_release/simclr_cifar10_resnet50_bs-1024_temp-0.2_2024-08-28_20-10-21/) |      [:link:](https://drive.google.com/file/d/1SC_sk7RlPO1zkSKPL8NPOO5MXGr_qOts/view?usp=sharing)      |
+| MoCo         | ResNet50 |  1000  | 94.62        | [:running:](./runs_release/moco_cifar10_resnet50_bs-512_temp-0.2_2024-08-29_23-23-50/)              |      [:link:](https://drive.google.com/file/d/1Dxh449cYGneYyAMwOmTgvceKlNWriNTr/view?usp=sharing)      |
 
 ### Cifar100
 | Method       | Backbone | Epochs | Offline Acc@1  | Tensorboard    | Checkpoint |
 |--------------|--------|:------:|:--------------:|:--------------:|:----------:|
-| CLSP-SimCLR  | ResNet18 |  1000  | 72.41        | [:link:](./runs_release/simclr_clsp_cifar100_resnet18_bs-1024_temp-0.2_2024-08-27_22-25-06/) |      [:link:](https://drive.google.com/file/d/16USqF1UgIJ97Xy55YmGWUm3nR3laWXLZ/view?usp=sharing)      |
-| CLSP-MoCo    | ResNet18 |  1000  | 72.33        | [:link:](./runs_release/moco_clsp_cifar100_resnet18_bs-512_temp-0.2_2024-08-28_12-47-17/) |      [:link:](https://drive.google.com/file/d/1u-XJIGOprherVrdDe_-61uZoV6WiCfN2/view?usp=sharing)      |
-| CLSP-SimCLR  | ResNet50 |  1000  | 74.65        | [:link:](./runs_release/simclr_clsp_cifar100_resnet50_bs-1024_temp-0.2_2024-08-29_02-06-45/) |      [:link:](https://drive.google.com/file/d/1zF6Z1-QsnbtjPCXPal4jKKr9MTMWYva_/view?usp=sharing)      |
-| CLSP-MoCo    | ResNet50 |  1000  |           | [:link:]() |      [:link:]()      |
-| SimCLR       | ResNet18 |  1000  | 68.10        | [:link:](./runs_release/simclr_cifar100_resnet18_bs-1024_temp-0.2_2024-08-28_13-02-52/) |      [:link:](https://drive.google.com/file/d/1EPrKTt3xInvl7EIJxCROMx0ML1-dgJ2Q/view?usp=sharing)      |
-| MoCo         | ResNet18 |  1000  | 68.91        | [:link:](./runs_release/moco_cifar100_resnet18_bs-512_temp-0.2_2024-08-16_13-54-02/) |      [:link:](https://drive.google.com/file/d/1ievHBaCwBPfWnvaUWIFYUhgqbcaeV1OM/view?usp=sharing)      |
-| SimCLR       | ResNet50 |  1000  | 70.16        | [:link:](./runs_release/simclr_cifar100_resnet50_bs-1024_temp-0.2_2024-08-29_08-07-35/) |      [:link:](https://drive.google.com/file/d/10gCYiBVO-biw7aTp6lIwiuK6imdTPIDI/view?usp=sharing)      |
-| MoCo         | ResNet50 |  1000  |           | [:link:]() |      [:link:]()      |
+| CLSP-SimCLR  | ResNet18 |  1000  | 72.41        | [:running:](./runs_release/simclr_clsp_cifar100_resnet18_bs-1024_temp-0.2_2024-08-27_22-25-06/)     |      [:link:](https://drive.google.com/file/d/16USqF1UgIJ97Xy55YmGWUm3nR3laWXLZ/view?usp=sharing)      |
+| CLSP-MoCo    | ResNet18 |  1000  | 72.33        | [:running:](./runs_release/moco_clsp_cifar100_resnet18_bs-512_temp-0.2_2024-08-28_12-47-17/)        |      [:link:](https://drive.google.com/file/d/1u-XJIGOprherVrdDe_-61uZoV6WiCfN2/view?usp=sharing)      |
+| CLSP-SimCLR  | ResNet50 |  1000  | 74.65        | [:running:](./runs_release/simclr_clsp_cifar100_resnet50_bs-1024_temp-0.2_2024-08-29_02-06-45/)     |      [:link:](https://drive.google.com/file/d/1zF6Z1-QsnbtjPCXPal4jKKr9MTMWYva_/view?usp=sharing)      |
+| CLSP-MoCo    | ResNet50 |  1000  | 76.43        | [:running:](./runs_release/moco_clsp_cifar100_resnet50_bs-512_temp-0.2_2024-08-30_00-07-50/)        |      [:link:](https://drive.google.com/file/d/1L3d_ZrfgGUECdzCqWNnqeyS-NCJ5e3Yw/view?usp=sharing)      |
+| SimCLR       | ResNet18 |  1000  | 68.10        | [:running:](./runs_release/simclr_cifar100_resnet18_bs-1024_temp-0.2_2024-08-28_13-02-52/)          |      [:link:](https://drive.google.com/file/d/1EPrKTt3xInvl7EIJxCROMx0ML1-dgJ2Q/view?usp=sharing)      |
+| MoCo         | ResNet18 |  1000  | 68.91        | [:running:](./runs_release/moco_cifar100_resnet18_bs-512_temp-0.2_2024-08-16_13-54-02/)             |      [:link:](https://drive.google.com/file/d/1ievHBaCwBPfWnvaUWIFYUhgqbcaeV1OM/view?usp=sharing)      |
+| SimCLR       | ResNet50 |  1000  | 70.16        | [:running:](./runs_release/simclr_cifar100_resnet50_bs-1024_temp-0.2_2024-08-29_08-07-35/)          |      [:link:](https://drive.google.com/file/d/10gCYiBVO-biw7aTp6lIwiuK6imdTPIDI/view?usp=sharing)      |
+| MoCo         | ResNet50 |  1000  | 72.68        | [:running:](./runs_release/moco_cifar100_resnet50_bs-512_temp-0.2_2024-08-30_15-39-09/)             |      [:link:](https://drive.google.com/file/d/1fJglOWrlEF1S7wAWmhzFot7jd9GBUkEx/view?usp=sharing)      |
 
 ### :one: Diffusion Model Training
 
@@ -66,8 +66,8 @@ CUDA_VISIBLE_DEVICES=0 python compute_fid_score.py \
 
 | Dataset      | Epochs | FID score     | Checkpoint |
 |--------------|:------:|:-------------:|:----------:|
-| Cifar10      | 2000   |               |  [:link:](https://drive.google.com/file/d/1XQn7HAWJnlz_p_lllzp44OcojlKkuWAR/view?usp=sharing)          |
-| Cifar100     | 2000   |               |  [:link:](https://drive.google.com/file/d/1gGlUkV5u1JKI1ADMFfiKy8qQc3Q56pE1/view?usp=sharing)          |
+| Cifar10      | 2000   |   3.58        |  [:link:](https://drive.google.com/file/d/1XQn7HAWJnlz_p_lllzp44OcojlKkuWAR/view?usp=sharing)          |
+| Cifar100     | 2000   |   6.06        |  [:link:](https://drive.google.com/file/d/1gGlUkV5u1JKI1ADMFfiKy8qQc3Q56pE1/view?usp=sharing)          |
 
 ### :two: Generate Synthetic Positives
 

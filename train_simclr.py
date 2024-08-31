@@ -85,7 +85,6 @@ def get_dataset(config):
         "cifar10": ((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
         "cifar100": ((0.5071, 0.4865, 0.4409), (0.2673, 0.2564, 0.2762)),
         "stl10": ((0.4914, 0.4823, 0.4466), (0.247, 0.243, 0.261)),
-        "imagenet100": ((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     }
     if config['dataset'] == 'cifar10':
         transform_list = [
@@ -123,8 +122,8 @@ def get_dataset(config):
         transform_list = [
             transforms.Compose([
                 transforms.RandomResizedCrop(size=config["img_size"]),
-                transforms.RandomHorizontalFlip(),
                 transforms.RandomApply([color_jitter], p=0.8),
+                transforms.RandomHorizontalFlip(),
                 transforms.RandomGrayscale(p=0.2),
                 transforms.ToTensor(),
                 transforms.Normalize(mean=MEANS_N_STD[config['dataset']][0], std=MEANS_N_STD[config['dataset']][1]),

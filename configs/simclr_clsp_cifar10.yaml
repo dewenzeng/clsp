@@ -16,8 +16,7 @@ hidden_dim: 4096
 temperature: 0.2
 num_workers: 32
 seed: 123
-# backbone: "resnet18"
-backbone: "resnet50"
+backbone: "resnet18"
 use_dp: True
 # clsp config
 # synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/cifar10_v12/synthetic_cifar10_ddim_interpolation_interpolation_0.1_8_candidates.npy"

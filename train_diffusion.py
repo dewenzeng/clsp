@@ -56,6 +56,19 @@ def prepare_data(rank, world_size, config):
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
             ]),
         )
+    elif config['dataset'] == 'stl10':
+        dataset = datasets.STL10(
+            root=config['data_path'], 
+            split='unlabeled', 
+            download=True,
+            transform=transforms.Compose([
+                transforms.Resize(config["img_size"]),
+                transforms.ToTensor(),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ]),
+        )
+    else:
+        raise NotImplementedError(f"dataset {config['dataset']} does not support")
     sampler = DistributedSampler(dataset, num_replicas=world_size, rank=rank, shuffle=True, drop_last=True)
     dataloader = DataLoader(dataset, batch_size=config["batch_size"], num_workers=0, drop_last=True, pin_memory=False, sampler=sampler)
     return dataloader
