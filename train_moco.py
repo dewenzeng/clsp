@@ -255,11 +255,11 @@ def train(config: Dict):
         encoder_q = get_resnet(backbone=config["backbone"], size='small', head='mlp', feat_dim=config["feat_dim"], hidden_dim=config["hidden_dim"])
         encoder_k = get_resnet(backbone=config["backbone"], size='small', head='mlp', feat_dim=config["feat_dim"], hidden_dim=config["hidden_dim"])
     elif config['dataset'] in ['stl10']:
-        encoder_q = get_resnet(backbone=config["backbone"], size='mid', head='mlp', feat_dim=config["feat_dim"])
-        encoder_k = get_resnet(backbone=config["backbone"], size='mid', head='mlp', feat_dim=config["feat_dim"])
+        encoder_q = get_resnet(backbone=config["backbone"], size='mid', head='mlp', feat_dim=config["feat_dim"], hidden_dim=config["hidden_dim"])
+        encoder_k = get_resnet(backbone=config["backbone"], size='mid', head='mlp', feat_dim=config["feat_dim"], hidden_dim=config["hidden_dim"])
     else:
-        encoder_q = get_resnet(backbone=config["backbone"], size='big', head='mlp', feat_dim=config["feat_dim"])
-        encoder_k = get_resnet(backbone=config["backbone"], size='big', head='mlp', feat_dim=config["feat_dim"])
+        encoder_q = get_resnet(backbone=config["backbone"], size='big', head='mlp', feat_dim=config["feat_dim"], hidden_dim=config["hidden_dim"])
+        encoder_k = get_resnet(backbone=config["backbone"], size='big', head='mlp', feat_dim=config["feat_dim"], hidden_dim=config["hidden_dim"])
     
     model = MoCo(
         encoder_q=encoder_q,

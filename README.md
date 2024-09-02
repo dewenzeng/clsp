@@ -1,6 +1,6 @@
 ## Contrastive Learning with Synthetic Positives
 
-This is a PyTorch implementation of CLSP paper.
+This is a PyTorch implementation of [CLSP](http://arxiv.org/abs/2408.16965) paper.
 
 <p align="center">
   <img src="figures/overview.png" width="800">
@@ -100,7 +100,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python train_simclr_clsp.py --config configs/simclr
 ```
 
 ### Citation
-If you use this code useful, please cite our [paper]():
+If you use this code useful, please cite our [paper](http://arxiv.org/abs/2408.16965):
 
 ### :heart: Reference
  - [pytorch-ddpm](https://github.com/w86763777/pytorch-ddpm/)

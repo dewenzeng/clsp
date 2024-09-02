@@ -45,7 +45,7 @@ class GaussianDiffusionTrainer(nn.Module):
         y = self.model(x_t, t)
         # diffusion loss.
         loss_mse = F.mse_loss(y, noise, reduction='none')
-        return loss_mse.mean()
+        return loss_mse
     
 
 class GaussianDiffusionSampler(nn.Module):

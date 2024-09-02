@@ -1,5 +1,5 @@
 epoch: 2000
-batch_size: 50    # The batch size on each GPU, this could affect the final diffusion training performance
+batch_size: 128    # The batch size on each GPU, this could affect the final diffusion training performance
 T: 1000
 channel: 128
 channel_mult:

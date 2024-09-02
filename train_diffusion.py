@@ -131,7 +131,7 @@ def train(rank, world_size, config):
                 # train
                 optimizer.zero_grad()
                 x = images.to(rank)
-                loss = ddp_trainer(x)
+                loss = ddp_trainer(x).mean()
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(ddp_trainer.parameters(), config["grad_clip"])
                 optimizer.step()

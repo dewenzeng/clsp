@@ -134,8 +134,8 @@ def get_dataset(config):
         transform_list = [
             transforms.Compose([
                 transforms.RandomResizedCrop(size=config["img_size"]),
-                transforms.RandomHorizontalFlip(),
                 transforms.RandomApply([color_jitter], p=0.8),
+                transforms.RandomHorizontalFlip(),
                 transforms.RandomGrayscale(p=0.2),
                 transforms.ToTensor(),
                 transforms.Normalize(mean=MEANS_N_STD[config['dataset']][0], std=MEANS_N_STD[config['dataset']][1]),
