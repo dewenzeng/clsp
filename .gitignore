@@ -2,6 +2,7 @@ runs/
 .vscode/
 output/
 debug.ipynb
+visualization.ipynb
 submit_job.sh
 configs/diffusion_cifar10_v2.yaml
 runs.sh

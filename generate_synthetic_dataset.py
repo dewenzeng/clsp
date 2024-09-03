@@ -40,6 +40,20 @@ class customized_cifar100_dataset(datasets.CIFAR100):
         """
         image, target = super().__getitem__(index)
         return image, target, index
+    
+class customized_stl10_dataset(datasets.STL10):
+    """Add additional index to the get function."""
+    
+    def __getitem__(self, index: int) -> Tuple[Any, Any, Any]:
+        """
+        Args:
+            index (int): Index
+
+        Returns:
+            tuple: (image, target, image_ids) where target is index of the target class.
+        """
+        image, target = super().__getitem__(index)
+        return image, target, index
 
 
 if __name__ == '__main__':
@@ -78,6 +92,21 @@ if __name__ == '__main__':
             ]),
             download=False,
         )
+    elif config['dataset'] =='stl10':
+        dataset = customized_stl10_dataset(
+            root='/afs/crc.nd.edu/user/d/dzeng2/data/stl10/', 
+            split='unlabeled',
+            transform=transforms.Compose([
+                transforms.Resize(config['img_size']),
+                transforms.ToTensor(),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ]),
+            download=False,
+        )
+        # If only use a subset
+        # dataset = torch.utils.data.Subset(dataset, list(range(0, 10000, 1)))
+    else:
+        raise NotImplementedError(f"Dataset {config['dataset']} not supported.")
 
     dataloader = DataLoader(dataset, batch_size=args.batch_size, shuffle=False, num_workers=8, drop_last=False, pin_memory=False)
     os.makedirs(args.save_dir, exist_ok=True)

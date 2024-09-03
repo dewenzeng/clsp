@@ -10,7 +10,7 @@ This is a PyTorch implementation of [CLSP](http://arxiv.org/abs/2408.16965) pape
 
 ### Cifar10
 
-Accuracy might be different from the number in the paper because of random initialization.
+The linear evaluation accuracy we get during training is similar to the offline setting. Accuracy might be different from the number in the paper because of random initialization.
 
 | Method       | Backbone | Epochs | Offline Acc@1  | Tensorboard    | Checkpoint |
 |--------------|--------|:------:|:--------------:|:--------------:|:----------:|
@@ -98,6 +98,10 @@ Use your own generated synthetic dataset or download the dataset from Step 2.
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3 python train_simclr_clsp.py --config configs/simclr_clsp_cifar10.yaml
 ```
+
+<p align="center">
+  <img src="figures/accuracy_comparison.png" width="80%">
+</p>
 
 ### Citation
 If you use this code useful, please cite our [paper](http://arxiv.org/abs/2408.16965):
