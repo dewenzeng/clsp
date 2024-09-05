@@ -112,6 +112,7 @@ If you use this code useful, please cite our [paper](http://arxiv.org/abs/2408.1
  - [solo-learn](https://github.com/vturrisi/solo-learn)
  - [pytorch-ddpm](https://github.com/w86763777/pytorch-ddpm/)
  - [denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch)
+ - [guided-diffusion](https://github.com/openai/guided-diffusion)
  - [SupContrast](https://github.com/HobbitLong/SupContrast)
  - [SimCLR](https://github.com/sthalles/SimCLR)
  - [MoCo](https://github.com/facebookresearch/moco)

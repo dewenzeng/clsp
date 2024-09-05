@@ -128,8 +128,6 @@ class GaussianDiffusionSampler(nn.Module):
         elif sample_method == "ddim":
             return self.ddim(x_T, sampling_timesteps=100, eta=1.0)
         elif sample_method == "ddim_interpolation":
-            # return self.ddim_interpolation(x_T, x_anchor, weight, sampling_timesteps=100, eta=0.0)
-            # return self.ddim_interpolation(x_T, x_anchor, weight, sampling_timesteps=200, eta=0.0)
             return self.ddim_interpolation(x_T, x_anchor, weight, sampling_timesteps=ddim_sampling_timesteps, eta=ddim_eta)
         else:
             raise NotImplementedError(f"Sample method {sample_method} is not implemented.")
