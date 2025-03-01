@@ -11,10 +11,11 @@ This is a PyTorch implementation of the [CLSP](http://arxiv.org/abs/2408.16965) 
 - The linear evaluation accuracy we get during training is similar to the offline setting. 
 - For Offline kNN evaluation, we do a grid search on k and report the best top1 accuracy.
 - Accuracy might be different from the number in the paper because of random initialization.
+- Most offline linear evaluation results for baselines are directly copied from [solo-learn](https://github.com/vturrisi/solo-learn). For offline kNN, we use their pre-trained checkpoint on our kNN evaluation code.
 
 ### Cifar10
 
-| Method       | Backbone | Epochs | Offline Acc@1|  Offline kNN   | Tensorboard    | Checkpoint |
+| Method       | Backbone | Epochs | Offline Linear Acc@1|  Offline kNN   | Tensorboard    | Checkpoint |
 |--------------|--------|:------:|:--------------:|:--------------:|:--------------:|:----------:|
 | CLSP-SimCLR  | ResNet18 |  1000  | 94.45        | 94.10 | [:running:](./runs_release/simclr_clsp_cifar10_resnet18_bs-1024_temp-0.2_2024-08-24_15-39-29/)      |      [:link:](https://drive.google.com/file/d/1eQbezpJWeI4dy65iuXeNU5_iCtY97YmB/view?usp=sharing)      |
 | CLSP-MoCo    | ResNet18 |  1000  | 94.62        | 94.01 | [:running:](./runs_release/moco_clsp_cifar10_resnet18_bs-512_temp-0.2_2024-08-24_22-14-18/)         |      [:link:](https://drive.google.com/file/d/1u-XJIGOprherVrdDe_-61uZoV6WiCfN2/view?usp=sharing)      |
@@ -26,7 +27,7 @@ This is a PyTorch implementation of the [CLSP](http://arxiv.org/abs/2408.16965) 
 | MoCo         | ResNet50 |  1000  | 94.62        | 94.33 | [:running:](./runs_release/moco_cifar10_resnet50_bs-512_temp-0.2_2024-08-29_23-23-50/)              |      [:link:](https://drive.google.com/file/d/1Dxh449cYGneYyAMwOmTgvceKlNWriNTr/view?usp=sharing)      |
 
 ### Cifar100
-| Method       | Backbone | Epochs | Offline Acc@1  | Offline kNN | Tensorboard    | Checkpoint |
+| Method       | Backbone | Epochs | Offline Linear Acc@1  | Offline kNN | Tensorboard    | Checkpoint |
 |--------------|--------|:------:|:--------------:|:--------------:|:----------:|:----------:|
 | CLSP-SimCLR  | ResNet18 |  1000  | 72.41        | 70.88 | [:running:](./runs_release/simclr_clsp_cifar100_resnet18_bs-1024_temp-0.2_2024-08-27_22-25-06/)     |      [:link:](https://drive.google.com/file/d/16USqF1UgIJ97Xy55YmGWUm3nR3laWXLZ/view?usp=sharing)      |
 | CLSP-MoCo    | ResNet18 |  1000  | 72.33        | 70.13 | [:running:](./runs_release/moco_clsp_cifar100_resnet18_bs-512_temp-0.2_2024-08-28_12-47-17/)        |      [:link:](https://drive.google.com/file/d/1u-XJIGOprherVrdDe_-61uZoV6WiCfN2/view?usp=sharing)      |
@@ -109,7 +110,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python train_simclr_clsp.py --config configs/simclr
 
 There are two ways to utilize class label to help SSL training
  - Class-conditional Diffusion Model
- - Supervised Contrastive learning (SupContrast)
+ - Supervised Contrastive Learning (SupContrast)
 
 #### Class-conditional Diffusion Model
 
@@ -131,7 +132,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python generate_synthetic_dataset_conditional.py \
 
 3. Train SSL with the synthetic positives (Use the same code as CLSP)
 
-Pre-trained model
+Pre-trained class-conditional diffusion model
 
 | Dataset      | Epochs | Checkpoint | Synthetic Dataset|
 |--------------|:------:|:----------:|:----------------:|

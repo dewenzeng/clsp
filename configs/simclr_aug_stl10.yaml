@@ -7,15 +7,17 @@ weight_decay: 1.0e-4
 img_size: 64
 device: "cuda:0"
 save_weight_dir: "ckpts"
-save_ckpt_interval: 200
+save_ckpt_interval: 100
 log_interval: 20
 dataset: "stl10"
 dataset_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
 feat_dim: 256
-hidden_dim: 4096
+hidden_dim: 2048
 temperature: 0.2
 num_workers: 32
-seed: 123
-# backbone: "resnet18"
-backbone: "resnet50"
+seed: 12
+backbone: "resnet18"
 use_dp: True
+# clsp config
+clsp_loss_weight: 1.0
+num_candidates: 8

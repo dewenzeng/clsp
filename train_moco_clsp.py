@@ -176,8 +176,7 @@ def get_dataset(config):
     MEANS_N_STD = {
             "cifar10": ((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
             "cifar100": ((0.5071, 0.4865, 0.4409), (0.2673, 0.2564, 0.2762)),
-            "stl10": ((0.4914, 0.4823, 0.4466), (0.247, 0.243, 0.261)),
-            "imagenet100": ((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+            "stl10": ((0.4914, 0.4823, 0.4466), (0.2471, 0.2435, 0.2616)),
         }
     if config['dataset'] == 'cifar10':
         transform_list = [
@@ -305,7 +304,7 @@ def train(config: Dict):
                 model.module.momentum_update_key_encoder() if config["use_dp"] else model.momentum_update_key_encoder()
                 q1, q2, q3, k1, k2, k3 = model(images[0], images[1], image_add)
                 queue = model.module.queue.clone().detach() if config["use_dp"] else model.queue.clone().detach()
-                loss_moco = (mocov2plus_loss_func(q1, k2, queue[1], config["temperature"]) + mocov2plus_loss_func(q2, k1, queue[0], config["temperature"])) / 2
+                loss_moco = (mocov2plus_loss_func(q1, k2, queue[1], config["temperature"]) + mocov2plus_loss_func(q2, k1, queue[0], config["temperature"])) / 2.0
                 # update memory bank.
                 keys = torch.stack((k1, k2))  # [2, B, D]
                 model.module.dequeue_and_enqueue(keys) if config["use_dp"] else model.dequeue_and_enqueue(keys)

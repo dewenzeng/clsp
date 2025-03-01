@@ -114,6 +114,10 @@ def train(rank, world_size, config):
                 f.writelines(eachArg + ': ' + str(value) + '\n')
     # model setup
     net_model = UNet(T=config["T"], ch=config["channel"], ch_mult=config["channel_mult"], attn=config["attn"], num_res_blocks=config["num_res_blocks"], dropout=config["dropout"]).to(rank)
+    if config["resume"]:
+        ckpt_state_dict = torch.load(config["ckpt_path"])
+        net_model.load_state_dict(ckpt_state_dict)
+        print(f"checkpoint loaded from path: {config['ckpt_path']}")
     if rank % world_size == 0:
         ema_model = copy.deepcopy(net_model)
         ema_sampler = GaussianDiffusionSampler(ema_model, config["beta_1"], config["beta_T"], config["T"]).to(rank)
