@@ -38,6 +38,14 @@ This is a PyTorch implementation of the [CLSP](http://arxiv.org/abs/2408.16965) 
 | SimCLR       | ResNet50 |  1000  | 70.16        | 69.21 | [:running:](./runs_release/simclr_cifar100_resnet50_bs-1024_temp-0.2_2024-08-29_08-07-35/)          |      [:link:](https://drive.google.com/file/d/10gCYiBVO-biw7aTp6lIwiuK6imdTPIDI/view?usp=sharing)      |
 | MoCo         | ResNet50 |  1000  | 72.68        | 72.25 | [:running:](./runs_release/moco_cifar100_resnet50_bs-512_temp-0.2_2024-08-30_15-39-09/)             |      [:link:](https://drive.google.com/file/d/1fJglOWrlEF1S7wAWmhzFot7jd9GBUkEx/view?usp=sharing)      |
 
+### STL10
+| Method       | Backbone | Epochs | Offline Linear Acc@1  | Tensorboard    | Checkpoint |
+|--------------|--------|:------:|:--------------:|:----------:|:----------:|
+| CLSP-SimCLR  | ResNet18 |  1000  | 94.74        | [:running:](./runs_release/simclr_stl10_resnet18_bs-1024_temp-0.2_2024-08-31_11-17-40/)     |      [:link:](https://drive.google.com/file/d/14MQW_EbpnswkjAQ2wMtFXobzr-eBXnUe/view?usp=sharing)      |
+| CLSP-MoCo    | ResNet18 |  1000  | 94.31        | [:running:](./runs_release/moco_clsp_stl10_resnet18_bs-1024_temp-0.2_2025-04-20_12-45-10/)        |      [:link:](https://drive.google.com/file/d/1nW-3B4ZX4OmJJwrwvM4NBJazSKQ8MfCX/view?usp=sharing)      |
+| SimCLR       | ResNet18 |  1000  | 91.31        | [:running:](./runs_release/simclr_clsp_stl10_resnet18_bs-1024_temp-0.2_2025-04-16_20-38-45/)          |      [:link:](https://drive.google.com/file/d/1bBwmhI3l8XIBRCAFBe22uX6njLGw6In4/view?usp=sharing)      |
+| MoCo         | ResNet18 |  1000  | 92.61        | [:running:](./runs_release/moco_stl10_resnet18_bs-1024_temp-0.2_2025-04-20_12-49-13/)             |      [:link:](https://drive.google.com/file/d/1AN_eRC8TCsyMok5r2AOVisII9MfPtErv/view?usp=sharing)      |
+
 ### :one: Diffusion Model Training
 
 Our ddpm training and sampling code are adapted from this [repo](https://github.com/zoubohao/DenoisingDiffusionProbabilityModel-ddpm-), ddim sampling code is adapted from this [repo](https://github.com/lucidrains/denoising-diffusion-pytorch/blob/main/denoising_diffusion_pytorch/denoising_diffusion_pytorch.py#L702).
@@ -75,19 +83,32 @@ CUDA_VISIBLE_DEVICES=0 python compute_fid_score.py \
 ### :two: Generate Synthetic Positives
 
 We use ddim to speedup the sampling process, to generate 8 synthetic positives for each of the data point in the dataset
+
+On Cifar10 or Cifar100
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3 python generate_synthetic_dataset.py \
 --ckpt_path ./pretrained_ckpts/uncondition_diffusion_cifar10.pt \
 --config configs/diffusion_cifar10.yaml \
 --save_dir ./synthetic_datasets/cifar10/ --num_candidates 8 --batch_size 4096 \
 --interpolation_weight 0.1 --sample_method ddim_interpolation \
---ddim_sampling_timesteps 100 --ddim_eta 0.1
+--ddim_sampling_timesteps 100 --ddim_eta 0.1 --num_interpolation_layers 1
+```
+
+On STL10
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3 python generate_synthetic_dataset.py \
+--ckpt_path ./pretrained_ckpts/uncondition_diffusion_stl10.pt \
+--config configs/diffusion_stl10.yaml \
+--save_dir ./synthetic_datasets/stl10/ --num_candidates 8 --batch_size 4096 \
+--interpolation_weight 0.1 --sample_method ddim_interpolation \
+--ddim_sampling_timesteps 200 --ddim_eta 0.1 --num_interpolation_layers 4
 ```
 
 | Dataset      | Synthetic Dataset |
 |--------------|:-----------------:|
 | Cifar10      | [:link:](https://drive.google.com/file/d/1Yql87mrbcp6vnsjtcE7zjOTn2HpLEJkz/view?usp=sharing)  |
 | Cifar100     | [:link:](https://drive.google.com/file/d/1i7NO5DvNhkhc-iM5HsCyeemQ3Dz-JZKS/view?usp=sharing)  |
+| STL10     | [:link:](https://drive.google.com/file/d/1sSCW7a6sjv973KfzBDCp8kx3jDLRc6QP/view?usp=sharing)  |
 
 ### :three: Self-supervised Training
 
@@ -163,14 +184,22 @@ Results
 | Cifar10  | ResNet18 |  1000  | 94.61        | 
 | Cifar100 | ResNet18 |  1000  | 73.89        | 
 
+### T-SNE Visualization on Cifar10
+
+<p align="center">
+  <img src="figures/tsne_comparison_simclr_resnet50.png" width="95%">
+</p>
+
 ### Citation
 If you use this code useful, please cite our [paper](http://arxiv.org/abs/2408.16965)
 ```
-@article{zeng2024contrastive,
-  title={Contrastive Learning with Synthetic Positives},
+@inproceedings{zeng2024contrastive,
+  title={Contrastive learning with synthetic positives},
   author={Zeng, Dewen and Wu, Yawen and Hu, Xinrong and Xu, Xiaowei and Shi, Yiyu},
-  journal={arXiv preprint arXiv:2408.16965},
-  year={2024}
+  booktitle={European Conference on Computer Vision},
+  pages={430--447},
+  year={2024},
+  organization={Springer}
 }
 ```
 

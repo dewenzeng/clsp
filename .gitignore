@@ -1,12 +1,16 @@
 runs/
 runs_back*/
+runs_show/
 .vscode/
 output/
 debug.ipynb
 visualization.ipynb
-submit_job.sh
+submit_job*.sh
 configs/diffusion_cifar10_v2.yaml
 generate_synthetic_dataset_v2.py
+generate_synthetic_dataset_v3.py
 train_diffusion_dp.py
 runs.sh
 .DS_Store
+tmp/
+debug.py

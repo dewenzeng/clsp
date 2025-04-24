@@ -298,13 +298,25 @@ class UNet(nn.Module):
         _, _, embeddings = self.encoder(x, temb, return_embedding=True)
         return embeddings
     
-    def forward_with_anchor(self, x, t, x_anchor, weight=0.1):
+    def forward_with_anchor(self, x, t, x_anchor, weight=0.1, num_layers=1):
+        """Feature interpolation on diffusion layers.
+
+        Args:
+        x: the model input
+        t: timestep
+        x_anchor: the anchor image for feature interpolation
+        weight: the interpolation weight
+        num_layers: the number layers used for feature interpolation.
+        """
         # Timestep embedding
         temb = self.time_embedding(t)
         h, hs, online_proj = self.encoder(x, temb)
         h_anchor, hs_anchor, online_proj_anchor = self.encoder(x_anchor, temb)
-        # Linear interpolation on h.
+        # Feature interpolation on the bottleneck layer h.
         h = weight * h + (1 - weight) * h_anchor
+        # Feature interpolation on upper layers if needed.
+        for i in range(1, num_layers):
+            hs[-i] = weight * hs[-i] + (1 - weight) * hs_anchor[-i]
         h = self.decoder(h, hs, temb)
         return h
 

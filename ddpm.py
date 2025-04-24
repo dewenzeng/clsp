@@ -103,11 +103,11 @@ class GaussianDiffusionSampler(nn.Module):
 
         return xt_prev_mean, var
     
-    def p_mean_variance_with_anchor(self, x_t, t, x_anchor, weight):
+    def p_mean_variance_with_anchor(self, x_t, t, x_anchor, weight, num_interpolation_layers):
         var = torch.cat([self.posterior_var[1:2], self.betas[1:]])
         var = extract(var, t, x_t.shape)
 
-        eps = self.model.forward_with_anchor(x_t, t, x_anchor, weight)
+        eps = self.model.forward_with_anchor(x_t, t, x_anchor, weight, num_interpolation_layers)
         xt_prev_mean = self.predict_xt_prev_mean_from_eps(x_t, t, eps=eps)
 
         return xt_prev_mean, var
@@ -128,7 +128,7 @@ class GaussianDiffusionSampler(nn.Module):
             extract(self.sqrt_one_minus_alphas_bar, t, x_0.shape) * noise)
         return x_t
     
-    def forward(self, x_T, labels=None, x_anchor=None, weight=None, sample_method="ddpm", ddim_sampling_timesteps=100, ddim_eta=1.0):
+    def forward(self, x_T, labels=None, x_anchor=None, weight=None, num_interpolation_layers=1, sample_method="ddpm", ddim_sampling_timesteps=100, ddim_eta=1.0):
         """Diffusion sampling with pre-trained model.
 
         Args:
@@ -136,6 +136,7 @@ class GaussianDiffusionSampler(nn.Module):
             labels: The conditional labels.
             x_anchor: The anchor image for interpolation
             weight: The interpolation weight
+            num_interpolation_layers: The number of middle layers used for feature interpolation
             sample_method: The sampling method. Choice from [ddpm, ddpm_interpolation, ddim, ddim_interpolation]
         Returns:
             The sampled image
@@ -143,11 +144,11 @@ class GaussianDiffusionSampler(nn.Module):
         if sample_method == "ddpm":
             return self.ddpm(x_T, labels)
         elif sample_method == "ddpm_interpolation":
-            return self.ddpm_interpolation(x_T, x_anchor, weight)
+            return self.ddpm_interpolation(x_T, x_anchor, weight, num_interpolation_layers=num_interpolation_layers)
         elif sample_method == "ddim":
             return self.ddim(x_T, labels, sampling_timesteps=100, eta=1.0)
         elif sample_method == "ddim_interpolation":
-            return self.ddim_interpolation(x_T, x_anchor, weight, sampling_timesteps=ddim_sampling_timesteps, eta=ddim_eta)
+            return self.ddim_interpolation(x_T, x_anchor, weight, num_interpolation_layers=num_interpolation_layers, sampling_timesteps=ddim_sampling_timesteps, eta=ddim_eta)
         else:
             raise NotImplementedError(f"Sample method {sample_method} is not implemented.")
 
@@ -178,7 +179,7 @@ class GaussianDiffusionSampler(nn.Module):
         features = self.model.get_middle_features(x_t, t)
         return features
     
-    def ddpm_interpolation(self, x_T, x_anchor, weight):
+    def ddpm_interpolation(self, x_T, x_anchor, weight, num_interpolation_layers):
         x_t = x_T
         for time_step in tqdm(reversed(range(0, self.T)), desc = 'sampling loop time step', total = self.T):
             t = x_t.new_ones([x_T.shape[0], ], dtype=torch.long) * time_step
@@ -186,7 +187,7 @@ class GaussianDiffusionSampler(nn.Module):
             xt_anchor = (
                 extract(self.sqrt_alphas_bar, t, x_anchor.shape) * x_anchor +
                 extract(self.sqrt_one_minus_alphas_bar, t, x_anchor.shape) * noise)
-            mean, var= self.p_mean_variance_with_anchor(x_t=x_t, t=t, x_anchor=xt_anchor, weight=weight)
+            mean, var= self.p_mean_variance_with_anchor(x_t=x_t, t=t, x_anchor=xt_anchor, weight=weight, num_interpolation_layers=num_interpolation_layers)
             # no noise when t == 0
             if time_step > 0:
                 noise = torch.randn_like(x_t)
@@ -236,7 +237,7 @@ class GaussianDiffusionSampler(nn.Module):
 
         return torch.clip(x_t, -1, 1)
     
-    def ddim_interpolation(self, x_T, x_anchor, weight, sampling_timesteps=100, eta=1.0):
+    def ddim_interpolation(self, x_T, x_anchor, weight, num_interpolation_layers=1, sampling_timesteps=100, eta=1.0):
         total_timesteps = self.T
         times = torch.linspace(-1, total_timesteps - 1, steps=sampling_timesteps + 1)   # [-1, 0, 1, 2, ..., T-1] when sampling_timesteps == total_timesteps
         times = list(reversed(times.int().tolist()))
@@ -250,7 +251,7 @@ class GaussianDiffusionSampler(nn.Module):
             xt_anchor = (
                 extract(self.sqrt_alphas_bar, t, x_anchor.shape) * x_anchor +
                 extract(self.sqrt_one_minus_alphas_bar, t, x_anchor.shape) * noise)
-            pred_noise = self.model.forward_with_anchor(x_t, t, xt_anchor, weight)
+            pred_noise = self.model.forward_with_anchor(x_t, t, xt_anchor, weight, num_interpolation_layers)
             x_start = (
                 extract(self.sqrt_recip_alphas_cumprod, t, x_t.shape) * x_t -
                 extract(self.sqrt_recipm1_alphas_cumprod, t, x_t.shape) * pred_noise

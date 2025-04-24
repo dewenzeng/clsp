@@ -64,6 +64,7 @@ if __name__ == '__main__':
     parser.add_argument('--num_candidates', default=0, type=int, help='the number of synthetic images generated for each sample in the dataset')
     parser.add_argument('--batch_size', default=256, type=int, help='the batch size used for diffusion sampling')
     parser.add_argument('--interpolation_weight', default=0.0, type=float, help='interpolation weight')
+    parser.add_argument('--num_interpolation_layers', default=1, type=int, help='the number of layers used for feature interpolation')
     parser.add_argument('--ddim_sampling_timesteps', default=100, type=int, help='ddim sampling timesteps')
     parser.add_argument('--ddim_eta', default=1.0, type=float, help='ddim ddim_eta')
     parser.add_argument('--sample_method', default='ddpm', type=str, help='diffusion sample method', choices=['ddpm', 'ddpm_interpolation', 'ddim', 'ddim_interpolation'])
@@ -94,7 +95,7 @@ if __name__ == '__main__':
         )
     elif config['dataset'] =='stl10':
         dataset = customized_stl10_dataset(
-            root='/afs/crc.nd.edu/user/d/dzeng2/data/stl10/', 
+            root=config['data_path'], 
             split='unlabeled',
             transform=transforms.Compose([
                 transforms.Resize(config['img_size']),
@@ -103,15 +104,13 @@ if __name__ == '__main__':
             ]),
             download=False,
         )
-        # If only use a subset
-        # dataset = torch.utils.data.Subset(dataset, list(range(0, 10000, 1)))
     else:
         raise NotImplementedError(f"Dataset {config['dataset']} not supported.")
 
     dataloader = DataLoader(dataset, batch_size=args.batch_size, shuffle=False, num_workers=8, drop_last=False, pin_memory=False)
     os.makedirs(args.save_dir, exist_ok=True)
     # create the dataset buffer
-    for candidate_idx in range(args.num_candidates):
+    for candidate_idx in range(0, args.num_candidates):
         generated_images = np.zeros([len(dataset), config["img_size"], config["img_size"], 3], dtype=np.uint8)
         print(f'generating for candidate index: {candidate_idx}')
 
@@ -130,7 +129,7 @@ if __name__ == '__main__':
                 anchor_image = anchor_image.to(device)
                 # Sampled from standard normal distribution.
                 noisyImage = torch.randn(size=[anchor_image.shape[0], 3, config["img_size"], config["img_size"]], device=device)
-                sampledImgs = sampler(noisyImage, x_anchor=anchor_image, weight=args.interpolation_weight, sample_method=args.sample_method, ddim_sampling_timesteps=args.ddim_sampling_timesteps, ddim_eta=args.ddim_eta)
+                sampledImgs = sampler(noisyImage, x_anchor=anchor_image, weight=args.interpolation_weight, num_interpolation_layers=args.num_interpolation_layers, sample_method=args.sample_method, ddim_sampling_timesteps=args.ddim_sampling_timesteps, ddim_eta=args.ddim_eta)
                 sampledImgs = sampledImgs * 0.5 + 0.5  # [0 ~ 1]
                 # Save generated images.
                 for i in range(len(sampledImgs)):

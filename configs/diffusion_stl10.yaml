@@ -1,126 +1,7 @@
-# epoch: 1000
-# batch_size: 50    # The batch size on each GPU, this could affect the final diffusion training performance
-# T: 1000
-# channel: 128
-# channel_mult:
-#   - 1
-#   - 2
-#   - 3
-#   - 4
-# attn:
-#   - 1
-#   - 2
-#   - 3
-# num_res_blocks: 3
-# dropout: 0.15
-# lr: 2.0e-4
-# beta_1: 1.0e-4
-# beta_T: 0.02
-# img_size: 64
-# grad_clip: 1.0
-# device: "cuda:0"
-# save_weight_dir: "Checkpoints"
-# sampled_dir: "SampledImgs"
-# sampledImgName: "sampled_images"
-# save_ckpt_interval: 100
-# nrow: 10
-# dataset: "stl10"
-# data_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
-
-# V2
-# epoch: 1000
-# batch_size: 40    # The batch size on each GPU, this could affect the final diffusion training performance
-# T: 1000
-# channel: 160
-# channel_mult:
-#   - 1
-#   - 2
-#   - 3
-#   - 4
-# attn:
-#   - 1
-# num_res_blocks: 2
-# dropout: 0.15
-# lr: 5.0e-5
-# beta_1: 1.0e-4
-# beta_T: 0.02
-# img_size: 64
-# grad_clip: 1.0
-# device: "cuda:0"
-# save_weight_dir: "Checkpoints"
-# sampled_dir: "SampledImgs"
-# sampledImgName: "sampled_images"
-# save_ckpt_interval: 100
-# nrow: 10
-# dataset: "stl10"
-# data_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
-
-# V3
-# epoch: 1000
-# batch_size: 30    # The batch size on each GPU, this could affect the final diffusion training performance
-# T: 1000
-# channel: 160
-# channel_mult:
-#   - 1
-#   - 2
-#   - 3
-#   - 4
-# attn:
-#   - 1
-#   - 2
-# num_res_blocks: 3
-# dropout: 0.15
-# lr: 2.0e-5
-# beta_1: 1.0e-4
-# beta_T: 0.02
-# img_size: 64
-# grad_clip: 1.0
-# device: "cuda:0"
-# save_weight_dir: "Checkpoints"
-# sampled_dir: "SampledImgs"
-# sampledImgName: "sampled_images"
-# save_ckpt_interval: 100
-# nrow: 10
-# dataset: "stl10"
-# data_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
-
-# V4
-# epoch: 1000
-# batch_size: 20    # The batch size on each GPU, this could affect the final diffusion training performance
-# T: 1000
-# channel: 192
-# channel_mult:
-#   - 1
-#   - 2
-#   - 3
-#   - 4
-# attn:
-#   - 1
-#   - 2
-#   - 3
-# num_res_blocks: 3
-# dropout: 0.15
-# lr: 5.0e-5
-# beta_1: 1.0e-4
-# beta_T: 0.02
-# img_size: 64
-# grad_clip: 1.0
-# device: "cuda:0"
-# save_weight_dir: "Checkpoints"
-# sampled_dir: "SampledImgs"
-# sampledImgName: "sampled_images"
-# save_ckpt_interval: 100
-# nrow: 10
-# dataset: "stl10"
-# data_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
-# resume: True
-# ckpt_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/uncondition_diffusion_stl10_2024-09-15_11-44-31/Checkpoints/ckpt_199_.pt"
-
-# V5
 epoch: 1000
-batch_size: 20    # The batch size on each GPU, this could affect the final diffusion training performance
+batch_size: 50    # The batch size on each GPU, this could affect the final diffusion training performance
 T: 1000
-channel: 192
+channel: 128
 channel_mult:
   - 1
   - 2
@@ -129,9 +10,10 @@ channel_mult:
 attn:
   - 1
   - 2
-num_res_blocks: 2
+  - 3
+num_res_blocks: 3
 dropout: 0.15
-lr: 5.0e-5
+lr: 2.0e-4
 beta_1: 1.0e-4
 beta_T: 0.02
 img_size: 64
@@ -144,5 +26,5 @@ save_ckpt_interval: 100
 nrow: 10
 dataset: "stl10"
 data_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
-resume: True
-ckpt_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/uncondition_diffusion_stl10_2024-09-23_12-14-32/Checkpoints/ckpt_299_.pt"
+resume: False
+ckpt_path: ""

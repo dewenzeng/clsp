@@ -85,7 +85,6 @@ def ema(source, target, decay):
 
 
 def warmup_lr(step):
-    # warmup = 3200
     warmup = 5000
     return min(step, warmup) / warmup
 
@@ -180,6 +179,8 @@ def train(rank, world_size, config):
                 sampledImgs = sampledImgs * 0.5 + 0.5  # [0 ~ 1]
                 save_image(sampledImgs, os.path.join(sampled_dir, config["sampledImgName"]+f'_{e:03d}.png'), nrow=config["nrow"])
 
+    writer.flush()
+    writer.close()
     cleanup()
 
 if __name__ == '__main__':

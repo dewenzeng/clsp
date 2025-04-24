@@ -1,5 +1,5 @@
 epoch: 1000
-batch_size: 512
+batch_size: 1024
 optimizer: "sgd"
 warmup_start_lr: 1.0e-3
 lr: 0.3
@@ -8,7 +8,7 @@ weight_decay: 1.0e-4
 img_size: 64
 device: "cuda:0"
 save_weight_dir: "ckpts"
-save_ckpt_interval: 100
+save_ckpt_interval: 200
 log_interval: 20
 dataset: "stl10"
 dataset_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/"
@@ -18,17 +18,11 @@ moco_K: 32768
 moco_momentum: 0.99
 temperature: 0.2
 num_workers: 32
-seed: 123
+seed: 12
 backbone: "resnet18"
 use_dp: True
 
 # clsp config
-# synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/data/stl10/interpoltation_v1_8.npy"
-# synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/stl10_v2/synthetic_stl10_ddim_interpolation_0.1_8_candidates.npy"
-# synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/stl10_v3/synthetic_stl10_ddim_interpolation_0.1_8_candidates.npy"
-# synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/stl10_v5/synthetic_stl10_ddim_interpolation_0.1_8_candidates.npy"
-# synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/stl10_v4/synthetic_stl10_ddim_interpolation_0.1_4_candidates.npy"
-# synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/stl10_v7/synthetic_stl10_ddim_interpolation_0.1_8_candidates.npy"
-synthetic_data_path: "/afs/crc.nd.edu/user/d/dzeng2/code/clsp/output/stl10_v8/synthetic_stl10_ddim_interpolation_0.1_8_candidates.npy"
-clsp_loss_weight: 0.2
+synthetic_data_path: "./synthetic_datasets/synthetic_stl10_8_candidates.npy"
+clsp_loss_weight: 0.4
 num_candidates: 8

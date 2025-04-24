@@ -251,7 +251,6 @@ def train(config: Dict):
     print(f"Output dir: {summary_string}")
     summary_dir = f"runs/{summary_string}"
     writer = SummaryWriter(summary_dir)
-    writer.add_text('config', str(config), 0)
     save_weight_dir = os.path.join(f"./output/{summary_string}", config["save_weight_dir"])
     writer.add_text('config', str(config), 0)
     os.makedirs(save_weight_dir, exist_ok=True)
@@ -288,7 +287,7 @@ def train(config: Dict):
         optimizer = torch.optim.SGD(model.parameters(), lr=config["lr"], momentum=0.9, weight_decay=config["weight_decay"])
     elif config["optimizer"] == "adamw":
         optimizer = torch.optim.AdamW(model.parameters(), lr=config["lr"], weight_decay=config["weight_decay"])
-    warmUpScheduler = LinearWarmupCosineAnnealingLR(optimizer, warmup_epochs=10, max_epochs=config["epoch"], warmup_start_lr=config["warmup_start_lr"], eta_min=0.0)
+    warmUpScheduler = LinearWarmupCosineAnnealingLR(optimizer, warmup_epochs=10, max_epochs=config["epoch"], warmup_start_lr=config["warmup_start_lr"], eta_min=1e-6)
 
     # start training
     n_iter = 0
@@ -351,7 +350,11 @@ def train(config: Dict):
             )
             writer.add_scalar('test/top1', top1, global_step=e+1)
             writer.add_scalar('test/top5', top5, global_step=e+1)
-                
+
+    writer.flush()
+    writer.close()
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, default="configs/moco_clsp_cifar10.yaml")

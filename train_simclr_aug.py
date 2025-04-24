@@ -232,6 +232,8 @@ def train(config):
             writer.add_scalar('test/top1', top1, global_step=e+1)
             writer.add_scalar('test/top5', top5, global_step=e+1)
 
+    writer.flush()
+    writer.close()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
